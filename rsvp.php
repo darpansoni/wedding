@@ -1,19 +1,71 @@
+<?php
+if(isset($_POST['email'])) {
+
+    // EDIT THE 2 LINES BELOW AS REQUIRED
+    $email_to = "rsvp@darpanwedsshubhanshi.com";
+    $email_subject =  $_POST['name'] . "- RSVP";
+
+    function died($error) {
+        // your error code can go here
+        echo "We are very sorry, but there were error(s) found with the form you submitted. ";
+        echo "These errors appear below.<br /><br />";
+        echo $error."<br /><br />";
+        echo "Please go back and fix these errors.<br /><br />";
+        die();
+    }
+
+
+    // validation expected data exists
+    if(!isset($_POST['name']) ||!isset($_POST['email'])) {
+        died('We are sorry, but there appears to be a problem with the form you submitted.');
+    }
+
+
+
+    $name = $_POST['name']; // required
+    $email_from = $_POST['email']; // required
+
+    $error_message = "";
+    $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+
+  if(!preg_match($email_exp,$email_from)) {
+    $error_message .= 'The Email Address you entered does not appear to be valid.<br />';
+  }
+
+    $string_exp = "/^[A-Za-z .'-]+$/";
+
+  if(!preg_match($string_exp,$name)) {
+    $error_message .= 'The Name you entered does not appear to be valid.<br />';
+  }
+
+
+
+    $email_message = "Details below.\n\n";
+
+
+    function clean_string($string) {
+      $bad = array("content-type","bcc:","to:","cc:","href");
+      return str_replace($bad,"",$string);
+    }
+
+
+
+    $email_message .= "Name: ".clean_string($name)."\n";
+    $email_message .= "Email: ".clean_string($email_from)."\n";
+
+
+// create email headers
+$headers = 'From: '.$email_from."\r\n".
+'Reply-To: '.$email_from."\r\n" .
+'X-Mailer: PHP/' . phpversion();
+@mail($email_to, $email_subject, $email_message, $headers);
+?>
+
+<!-- include your own success html here -->
+
+Thank you for contacting us. We will be in touch with you very soon.
 
 <?php
-if(isset($_POST['submit'])){
-    $to = "darpan89@gmail.com"; // this is your Email address
-    $from = $_POST['email']; // this is the sender's Email address
-    $first_name = $_POST['name'];
-    $subject = "Form submission";
-    $subject2 = "Copy of your form submission";
-    $message = $first_name . " wrote the following:" . "\n\n" . $_POST['message'];
-    $message2 = "Here is a copy of your message " . $first_name . "\n\n" . $_POST['message'];
 
-    $headers = "From:" . $from;
-    $headers2 = "From:" . $to;
-    mail($to,$subject,$message,$headers);
-    mail($from,$subject2,$message2,$headers2); // sends a copy of the message to the sender
-    echo "Mail Sent. Thank you " . $first_name . ", we will contact you shortly.";
-    // You can also use header('Location: thank_you.php'); to redirect to another page.
-    }
+}
 ?>
