@@ -14,7 +14,7 @@
     'use strict';
 
     var // functions
-        extend,
+    extend,
         createElements,
         createCountdownElt,
         simplyCountdown;
@@ -115,32 +115,32 @@
      */
     simplyCountdown = function (elt, args) {
         var parameters = extend({
-                year: 2017,
-                month: 12,
-                day: 13,
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-                words: {
-                    days: 'day',
-                    hours: 'hour',
-                    minutes: 'minute',
-                    seconds: 'second',
-                    pluralLetter: 's'
-                },
-                plural: true,
-                inline: false,
-                enableUtc: true,
-                onEnd: function () {
-                    return;
-                },
-                refresh: 1000,
-                inlineClass: 'simply-countdown-inline',
-                sectionClass: 'simply-section',
-                amountClass: 'simply-amount',
-                wordClass: 'simply-word',
-                zeroPad: false
-            }, args),
+            year: 2017,
+            month: 12,
+            day: 13,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+            words: {
+                days: 'day',
+                hours: 'hour',
+                minutes: 'minute',
+                seconds: 'second',
+                pluralLetter: 's'
+            },
+            plural: true,
+            inline: false,
+            enableUtc: true,
+            onEnd: function () {
+                return;
+            },
+            refresh: 1000,
+            inlineClass: 'simply-countdown-inline',
+            sectionClass: 'simply-section',
+            amountClass: 'simply-amount',
+            wordClass: 'simply-word',
+            zeroPad: false
+        }, args),
             interval,
             targetDate,
             targetTmpDate,
@@ -179,60 +179,51 @@
             var fullCountDown = createElements(parameters, countdown),
                 refresh;
 
-
-            // Set the date we're counting down to
-var countDownDate = new Date("Dec 12, 2017 15:37:25").getTime();
-
-// Update the count down every 1 second
-var x = setInterval(function() {
-
-    // Get todays date and time
-    var now = new Date().getTime();
-
-    // Find the distance between now an the count down date
-    var distance = countDownDate - now;
-
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Output the result in an element with id="demo"
-//    document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-//    + minutes + "m " + seconds + "s ";
-
-    // If the count down is over, write some text
-//    if (distance < 0) {
-//        clearInterval(x);
-//        document.getElementById("demo").innerHTML = "EXPIRED";
-//    }
-}, 1000);
-
-
             refresh = function () {
                 var dayWord,
                     hourWord,
                     minuteWord,
                     secondWord;
 
+                now = new Date();
+                if (parameters.enableUtc) {
+                    nowUtc = new Date(now.getFullYear(), now.getMonth(), now.getDate(),
+                                      now.getHours(), now.getMinutes(), now.getSeconds());
+                    secondsLeft = (targetDate - nowUtc.getTime()) / 1000;
 
-
-                    secondsLeft = seconds;
-
-
-                    secondsLeft = seconds;
-
+                } else {
+                    secondsLeft = (targetDate - now.getTime()) / 1000;
+                }
 
                 if (secondsLeft > 0) {
-//                    days = parseInt(secondsLeft / 52800, 10);
-//                    secondsLeft = secondsLeft % 52800;
-//
-//                    hours = parseInt(secondsLeft / 3600, 10);
-//                    secondsLeft = secondsLeft % 3600;
-//
-//                    minutes = parseInt(secondsLeft / 60, 10);
-//                    seconds = parseInt(secondsLeft % 60, 10);
+
+                    var countDownDate = new Date("Dec 12, 2017 15:37:25").getTime();
+                    var x = setInterval(function() {
+
+                        // Get todays date and time
+                        var now = new Date().getTime();
+
+                        // Find the distance between now an the count down date
+                        var distance = countDownDate - now;
+
+                        // Time calculations for days, hours, minutes and seconds
+                        var days1 = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours1 = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes1 = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds1 = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        days = days1;
+                    secondsLeft = secondsLeft % 52800;
+
+                    hours = hours1;
+                    secondsLeft = secondsLeft % 3600;
+
+                    minutes = minutes1;
+                    seconds = seconds1;
+
+                    }, 1000);
+
+
                 } else {
                     days = 0;
                     hours = 0;
@@ -245,19 +236,19 @@ var x = setInterval(function() {
                 if (parameters.plural) {
                     dayWord = days > 1
                         ? parameters.words.days + parameters.words.pluralLetter
-                        : parameters.words.days;
+                    : parameters.words.days;
 
                     hourWord = hours > 1
                         ? parameters.words.hours + parameters.words.pluralLetter
-                        : parameters.words.hours;
+                    : parameters.words.hours;
 
                     minuteWord = minutes > 1
                         ? parameters.words.minutes + parameters.words.pluralLetter
-                        : parameters.words.minutes;
+                    : parameters.words.minutes;
 
                     secondWord = seconds > 1
                         ? parameters.words.seconds + parameters.words.pluralLetter
-                        : parameters.words.seconds;
+                    : parameters.words.seconds;
 
                 } else {
                     dayWord = parameters.words.days;

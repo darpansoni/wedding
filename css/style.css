@@ -113,26 +113,53 @@ h1, h2, h3, h4, h5, h6, figure {
 
     .simply-countdown > .simply-section {
 
-    width: 75px !important;
-    height: 75px !important;
+        width: 73px !important;
+        height: 73px !important;
 
-}
+    }
 
     .simply-countdown > .simply-section .simply-amount {
-    margin-top: -20px !important;
-}
+        margin-top: -35px !important;
+    }
 
     .simply-countdown > .simply-section .simply-word {
-    margin-top: -15px !important;
-}
+        margin-top: -15px !important;
+    }
 
     #fh5co-header{
-            background-image: url(http://www.hifreevideos.com/images/preview/Indian-Wedding-Background-Wallpaper-Images-Pictures-20567.jpg) !important;
+        background-image: url(http://www.hifreevideos.com/images/preview/Indian-Wedding-Background-Wallpaper-Images-Pictures-20567.jpg) !important;
     }
 
     .fh5co-cover .display-t, .fh5co-cover .display-tc {
-    margin-top: -30px !important;
-}
+        margin-top: -30px !important;
+    }
+
+    #liveVideo{
+        height: 210px !important;
+        width: 334px !important;
+    }
+
+    #videoHead{
+        margin-top:60px !important;
+    }
+
+    .videosection{
+        min-height:520px !important;
+    }
+
+    #locationDiv,#mapDiv{
+        width:44% !important;
+    }
+
+    #gmap_canvas{
+        height: 290px !important;
+    width: 250px !important;
+    }
+
+    #mapDivHeight {
+        height:400px !important;
+    }
+
 
 
 }
@@ -482,6 +509,8 @@ h1, h2, h3, h4, h5, h6, figure {
     padding-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: darkred;
+    font-weight: 600;
 }
 #fh5co-counter .event-wrap p, #fh5co-counter .event-wrap span,
 #fh5co-event .event-wrap p,
@@ -1497,6 +1526,7 @@ form label {
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
+    background-image: url(https://i.ytimg.com/vi/x1jutLkdUtg/maxresdefault.jpg);
 }
 .offcanvas #fh5co-offcanvas {
     -moz-transform: translateX(0px);
