@@ -153,13 +153,24 @@ h1, h2, h3, h4, h5, h6, figure {
 
     #gmap_canvas{
         height: 290px !important;
-    width: 250px !important;
+        width: 250px !important;
     }
 
     #mapDivHeight {
         height:400px !important;
     }
+    .eventDesc{
+        height:2845px !important;
+    }
 
+    .eventImg{
+        height: 110px !important;
+        display: block;
+    }
+
+    #sangeetBox{
+        height: 1020px !important;
+    }
 
 
 }
